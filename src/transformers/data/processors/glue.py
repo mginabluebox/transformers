@@ -515,6 +515,46 @@ class WnliProcessor(DataProcessor):
             examples.append(InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
         return examples
 
+class BoolqProcessor(DataProcessor):
+    """ Processor for the Boolean Questions data set (SuperGLUE)."""
+    def get_train_examples(self,data_dir):
+        """See base class."""
+        return self._create_examples(self._read_jsonl(os.path.join(data_dir,"train.jsonl")),"train")
+    
+    def get_dev_examples(self,data_dir):
+        """See base class."""
+        return self._create_examples(self._read_jsonl(os.path.join(data_dir,"dev.jsonl")),"dev")
+    
+    def get_labels(self):
+        """See base class."""
+        return ["false","true"]
+
+    def _read_jsonl(self,input_dir):
+        lines = []
+        with open(dataset, 'r', encoding = "utf-8-sig") as jsonlines:
+            for jline in jsonlines:
+                line = json.loads(jline)
+                lines.append(line)
+        return lines
+
+    def _create_examples(self,lines,set_type):
+        """Creates examples for the training and dev sets."""
+        examples = []
+        for(i, data_raw) in enumerate(lines):
+            guid = "%s-%s" % (set_type, data_raw["title"].lower().replace(" ", "-"))
+            passage = data_raw["passage"]
+            question = data_raw["question"]
+            answer = data_raw["answer"]
+            
+            examples.append(
+                InputExample(
+                    guid = guid,
+                    text_a = question,
+                    text_b = passage,
+                    label = answer
+                )
+            )
+        return examples
 
 glue_tasks_num_labels = {
     "cola": 2,
@@ -526,6 +566,7 @@ glue_tasks_num_labels = {
     "qnli": 2,
     "rte": 2,
     "wnli": 2,
+    "boolq": 2
 }
 
 glue_processors = {
@@ -539,6 +580,7 @@ glue_processors = {
     "qnli": QnliProcessor,
     "rte": RteProcessor,
     "wnli": WnliProcessor,
+    "boolq": BoolqProcessor
 }
 
 glue_output_modes = {
@@ -552,4 +594,5 @@ glue_output_modes = {
     "qnli": "classification",
     "rte": "classification",
     "wnli": "classification",
+    "boolq":"classification"
 }
