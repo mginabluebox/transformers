@@ -519,10 +519,12 @@ class BoolqProcessor(DataProcessor):
     """ Processor for the Boolean Questions data set (SuperGLUE)."""
     def get_train_examples(self,data_dir):
         """See base class."""
+        logger.info("LOOKING AT {} train".format(data_dir))
         return self._create_examples(self._read_jsonl(os.path.join(data_dir,"train.jsonl")),"train")
     
     def get_dev_examples(self,data_dir):
         """See base class."""
+        logger.info("LOOKING AT {} dev".format(data_dir))
         return self._create_examples(self._read_jsonl(os.path.join(data_dir,"dev.jsonl")),"dev")
     
     def get_labels(self):
