@@ -530,7 +530,7 @@ class BoolqProcessor(DataProcessor):
     
     def get_labels(self):
         """See base class."""
-        return ["false","true"]
+        return ["False","True"]
 
     def _read_jsonl(self,input_dir):
         lines = []
