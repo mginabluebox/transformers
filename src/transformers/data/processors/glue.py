@@ -533,7 +533,7 @@ class BoolqProcessor(DataProcessor):
 
     def _read_jsonl(self,input_dir):
         lines = []
-        with open(dataset, 'r', encoding = "utf-8-sig") as jsonlines:
+        with open(input_dir, 'r', encoding = "utf-8-sig") as jsonlines:
             for jline in jsonlines:
                 line = json.loads(jline)
                 lines.append(line)
