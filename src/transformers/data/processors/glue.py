@@ -548,7 +548,7 @@ class BoolqProcessor(DataProcessor):
             guid = "%s-%s" % (set_type, i)
             passage = data_raw["passage"]
             question = data_raw["question"]
-            answer = data_raw["answer"]
+            answer = data_raw["label"]
             
             examples.append(
                 InputExample(
