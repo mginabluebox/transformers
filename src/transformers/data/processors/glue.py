@@ -544,7 +544,7 @@ class BoolqProcessor(DataProcessor):
         """Creates examples for the training and dev sets."""
         examples = []
         for(i, data_raw) in enumerate(lines):
-            guid = "%s-%s" % (set_type, data_raw["title"].lower().replace(" ", "-"))
+            guid = "%s-%s" % (set_type, i)
             passage = data_raw["passage"]
             question = data_raw["question"]
             answer = data_raw["answer"]
