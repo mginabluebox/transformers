@@ -538,6 +538,7 @@ class BoolqProcessor(DataProcessor):
             for jline in jsonlines:
                 line = json.loads(jline)
                 lines.append(line)
+        print(lines[0])
         return lines
 
     def _create_examples(self,lines,set_type):
