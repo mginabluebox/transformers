@@ -518,7 +518,7 @@ class WnliProcessor(DataProcessor):
 
 class BoolqProcessor(DataProcessor):
     """ Processor for the Boolean Questions data set (SuperGLUE)."""
-    def get_train_examples(self,data_dir):
+    def get_train_examples(self, data_dir):
         """See base class."""
         logger.info("LOOKING AT {} train".format(data_dir))
         return self._create_examples(self._read_jsonl(os.path.join(data_dir,"train.jsonl")),"train")
@@ -538,6 +538,7 @@ class BoolqProcessor(DataProcessor):
             for jline in jsonlines:
                 line = json.loads(jline)
                 lines.append(line)
+        print(lines[0])
         return lines
 
     def _create_examples(self,lines,set_type):
